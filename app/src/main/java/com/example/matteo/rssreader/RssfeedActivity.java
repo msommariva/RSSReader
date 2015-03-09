@@ -1,19 +1,27 @@
 package com.example.matteo.rssreader;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
-public class RssfeedActivity extends Activity implements MyListFragment.OnItemSelectedListener {
+public class RssfeedActivity extends ActionBarActivity implements MyListFragment.OnItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rssfeed);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mainmenu,menu);
+        return true;
     }
 
     @Override
@@ -29,5 +37,23 @@ public class RssfeedActivity extends Activity implements MyListFragment.OnItemSe
             intent.putExtra(DetailActivity.EXTRA_URL, link);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case R.id.action_refresh:
+                Toast.makeText(this, "Refresh button pressed", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_settings:
+                Toast.makeText(this, "Setting button pressed", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+
+        return true;
     }
 }
